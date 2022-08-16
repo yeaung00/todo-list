@@ -61,7 +61,7 @@ const Project = (() => {
         Task[titleIndex].splice(taskIndex, 1, newTask);
     }
     function editTitle(oldTitle, newTitle) {
-        titleIndex = Title.indexOf(oldTitle);
+        const titleIndex = Title.indexOf(oldTitle);
         Title.splice(titleIndex, 1, newTitle);
     }
     function createTaskArray() {
@@ -163,6 +163,7 @@ const IconEvent = (() => {
     function titleEnterKey(e, oldTitle) {
         if (e.key === "Enter") {
             e.target.setAttribute("contenteditable", "false");
+            console.log(oldTitle);
             Project.editTitle(oldTitle, e.target.textContent);
             Nav.saveTitleToLocalStorage();
         }
