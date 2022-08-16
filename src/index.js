@@ -13,6 +13,46 @@ const Project = (() => {
         getTitle,
     };
 })();
+const Icon = (() => {
+    function makeEditIcon() {
+        const editIcon = document.createElement("i");
+
+        editIcon.classList.add("fa");
+        editIcon.classList.add("fa-pen-to-square");
+
+       // editIcon.addEventListener("click", IconEvent.editItem);
+        return editIcon;
+    }
+    function makeTrashIcon() {
+        const trashIcon = document.createElement("i");
+
+        trashIcon.classList.add("fa");
+        trashIcon.classList.add("fa-trash");
+
+        //trashIcon.addEventListener('click', IconEvent.deleteItem);
+
+        return trashIcon;
+    }
+    function iconSpan() {
+        const iconSpan = document.createElement("span");
+
+        iconSpan.classList.add("iconSpan");
+        iconSpan.classList.add("hidden");
+
+        iconSpan.appendChild(makeTrashIcon());
+        iconSpan.appendChild(makeEditIcon());
+
+        return iconSpan;
+    }
+    function toggleIcon(e) {
+        const iconSpan = e.target.children[1];
+        iconSpan.classList.toggle("hidden");
+    }
+    return {
+        iconSpan,
+        toggleIcon,
+    };
+})();
 const Nav = (() => {
     let currentTitle;
     //cache DOM
@@ -50,7 +90,7 @@ const Nav = (() => {
         titleButton.classList.add("projectBtn");
         titleButton.textContent = title;
         titleButton.addEventListener("click", setCurrentTitle);
-        titleButton.addEventListener("click", ProjectPreview.render);
+     //   titleButton.addEventListener("click", ProjectPreview.render);
 
         titleButtonDiv.appendChild(titleButton);
         titleButtonDiv.appendChild(Icon.iconSpan());
