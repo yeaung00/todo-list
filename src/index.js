@@ -205,3 +205,12 @@ const ProjectPreview = (() => {
         render,
     }
 })();
+
+const NotesPreview = (() => {
+    //cache DOM
+    const noteTitle = document.getElementById("noteTitle");
+    const textArea = document.getElementById("textArea");
+    const noteButtonDiv = document.getElementById("noteButtonDiv");
+    const cancelNoteButton = document.getElementById("cancelNoteButton");
+    const saveNoteButton = document.getElementById("saveNoteButton");
+})();
