@@ -1,16 +1,29 @@
 import './style.css';
 const Project = (() => {
     let Title = [];
-
+    let Task = [];
     function setTitle(title) {
         Title.push(title);
     }
     function getTitle() {
         return Title;
     }
+    function setTask(task) {
+        const titleIndex = Title.indexOf(Nav.getCurrentTitle());
+        Task[titleIndex].push(task);
+    }
+    function getTask() {
+        return Task;
+    }
+    function createTaskArray() {
+        Task.push([]);
+    }
     return {
         setTitle,
         getTitle,
+        setTask,
+        getTask,
+        createTaskArray,
     };
 })();
 const Icon = (() => {
@@ -68,11 +81,15 @@ const Nav = (() => {
     submitButton.addEventListener("click", toggleHidden);
     submitButton.addEventListener("click", setCurrentTitle);
     submitButton.addEventListener("click", createProject);
+    submitButton.addEventListener("click", clearInput);
 
     function toggleHidden() {
         addProjectButton.classList.toggle("hidden");
         projectDescriptionDiv.classList.toggle("hidden");
         console.log("Hello");
+    }
+    function clearInput() {
+        projectDescriptionInput.value = "";
     }
     function setCurrentTitle(e) {
         if (e.target.id === "submitButton") { currentTitle = projectDescriptionInput.value; }
@@ -83,6 +100,7 @@ const Nav = (() => {
     }
     function createProject() {
         Project.setTitle(currentTitle);
+        Project.createTaskArray();
         render();
     }
     function createButton(title) {
@@ -114,6 +132,7 @@ const Nav = (() => {
     };
 })();
 const ProjectPreview = (() => {
+    let currentTask;
     //cache DOM
     const projectTitle = document.getElementById("projectTitle");
     const addTaskButton = document.getElementById("addTaskButton");
@@ -126,14 +145,61 @@ const ProjectPreview = (() => {
     addTaskButton.addEventListener("click", toggleHidden);
     cancelTaskButton.addEventListener("click", toggleHidden);
     submitTaskButton.addEventListener("click", toggleHidden);
-    
+    submitTaskButton.addEventListener("click", setCurrentTask);
+    submitTaskButton.addEventListener("click", createTask);
+    submitTaskButton.addEventListener("click", clearInput);
+
+    function setCurrentTask(e) {
+        if (e.target.id === "submitTaskButton") { currentTask = taskDescriptionInput.value; }
+        else { currentTask = e.target.textContent; }
+
+    }
+    function getCurrentTask() {
+        return currentTask;
+    }
     function toggleHidden() {
         taskDescriptionDiv.classList.toggle("hidden");
         addTaskButton.classList.toggle("hidden");
     }
+    function clearInput() {
+        taskDescriptionInput.value = "";
+    }
+    function createTask() {
+        Project.setTask(currentTask);
+       // Project.createNoteSubArray();
+        render();
+    }
+    function createButton(task) {
+        const taskButton = document.createElement("button");
+
+        taskButton.classList.add("white");
+        taskButton.classList.add("projectBtn");
+        taskButton.textContent = task;
+        taskButton.addEventListener("click", setCurrentTask);
+      //  taskButton.addEventListener("click", NotesPreview.render);
+
+        return taskButton;
+    }
     function render() {
+        const Task = Project.getTask();
+      //  const Date = Project.getDate();
+        taskDiv.innerHTML = "";
         projectTitle.textContent = Nav.getCurrentTitle();
         addTaskButton.classList.remove("hidden");
+
+        const titleIndex = Project.getTitle().indexOf(Nav.getCurrentTitle());
+        if (Task[titleIndex] === undefined) { return; }
+        for (let i = 0; i < Task[titleIndex].length; i++) {
+            const taskButtonDiv = document.createElement("div");
+            const iconSpan = Icon.iconSpan();
+
+            taskButtonDiv.appendChild(createButton(Task[titleIndex][i]));
+            taskButtonDiv.appendChild(iconSpan);
+           // taskButtonDiv.appendChild(createDate(Date[titleIndex][i]));
+            taskButtonDiv.addEventListener("mouseenter", Icon.toggleIcon);
+            taskButtonDiv.addEventListener("mouseleave", Icon.toggleIcon);
+            taskDiv.appendChild(taskButtonDiv);
+        }
     }
     return {
         render,
