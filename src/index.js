@@ -1,5 +1,18 @@
 import './style.css';
+const Project = (() => {
+    let Title = [];
 
+    function setTitle(title) {
+        Title.push(title);
+    }
+    function getTitle() {
+        return Title;
+    }
+    return {
+        setTitle,
+        getTitle,
+    };
+})();
 const Nav = (() => {
     let currentTitle;
     //cache DOM
@@ -19,12 +32,13 @@ const Nav = (() => {
     function toggleHidden() {
         addProjectButton.classList.toggle("hidden");
         projectDescriptionDiv.classList.toggle("hidden");
+        console.log("Hello");
     }
     function setCurrentTitle(e) {
         if (e.target.id === "submitButton") { currentTitle = projectDescriptionInput.value; }
         else { currentTitle = e.target.textContent; }
     }
     function createProject() {
-
+        Project.setTitle(currentTitle);
     }
 })();
