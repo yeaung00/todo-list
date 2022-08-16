@@ -2,6 +2,8 @@ import './style.css';
 const Project = (() => {
     let Title = [];
     let Task = [];
+    let Date = [];
+    let Note = [];
     function setTitle(title) {
         Title.push(title);
     }
@@ -15,15 +17,31 @@ const Project = (() => {
     function getTask() {
         return Task;
     }
+    function setDate(e) {
+        const titleIndex = Title.indexOf(Nav.getCurrentTitle());
+        const currentTask = e.target.closest("#taskDiv > div").children[0].textContent;
+        const index = Task[titleIndex].indexOf(currentTask);
+
+        Date[titleIndex].splice(index, 1, e.target.value);
+    }
+    function getDate() {
+        return Date;
+    }
     function createTaskArray() {
         Task.push([]);
+    }
+    function createDateArray() {
+        Date.push([]);
     }
     return {
         setTitle,
         getTitle,
         setTask,
         getTask,
+        setDate,
+        getDate,
         createTaskArray,
+        createDateArray,
     };
 })();
 const Icon = (() => {
@@ -101,6 +119,7 @@ const Nav = (() => {
     function createProject() {
         Project.setTitle(currentTitle);
         Project.createTaskArray();
+        Project.createDateArray();
         render();
     }
     function createButton(title) {
@@ -180,9 +199,22 @@ const ProjectPreview = (() => {
 
         return taskButton;
     }
+    function createDate(date) {
+        const dateDiv = document.createElement("div");
+        const dateInput = document.createElement("input");
+
+        dateInput.setAttribute("type", "date");
+        dateInput.classList.add("dueDate")
+        dateInput.addEventListener("input", Project.setDate);
+       // dateInput.addEventListener("input", saveDateToLocalStorage);
+        
+        if (date !== undefined) { dateInput.value = date; }
+        dateDiv.appendChild(dateInput);
+        return dateDiv;
+    }
     function render() {
         const Task = Project.getTask();
-      //  const Date = Project.getDate();
+        const Date = Project.getDate();
         taskDiv.innerHTML = "";
         projectTitle.textContent = Nav.getCurrentTitle();
         addTaskButton.classList.remove("hidden");
@@ -195,7 +227,7 @@ const ProjectPreview = (() => {
 
             taskButtonDiv.appendChild(createButton(Task[titleIndex][i]));
             taskButtonDiv.appendChild(iconSpan);
-           // taskButtonDiv.appendChild(createDate(Date[titleIndex][i]));
+            taskButtonDiv.appendChild(createDate(Date[titleIndex][i]));
             taskButtonDiv.addEventListener("mouseenter", Icon.toggleIcon);
             taskButtonDiv.addEventListener("mouseleave", Icon.toggleIcon);
             taskDiv.appendChild(taskButtonDiv);
@@ -213,4 +245,17 @@ const NotesPreview = (() => {
     const noteButtonDiv = document.getElementById("noteButtonDiv");
     const cancelNoteButton = document.getElementById("cancelNoteButton");
     const saveNoteButton = document.getElementById("saveNoteButton");
+
+    function render() {
+        const titleIndex = Project.getTitle().indexOf(Nav.getCurrentTitle());
+        const taskIndex = Project.getTask()[titleIndex].indexOf(ProjectPreview.getCurrentTask());
+        const Note = Project.getNote();
+        noteTitle.textContent = ProjectPreview.getCurrentTask();
+        removeHiddenTextArea();
+        if (Note[titleIndex] === undefined) { return; }
+        textArea.value = Note[titleIndex][taskIndex];
+    }
+    return {
+        render,
+    };
 })();
