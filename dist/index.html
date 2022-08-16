@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-List</title>
+    <script src="https://kit.fontawesome.com/99e8ec9a45.js" crossorigin="anonymous"></script>
+    <script src = "main.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 id = "title" class = "white"><span><i class="fa fa-clipboard-check"></i></span> Todo List</h1>
+    </header>
+    <main>
+        <div id = "content">
+            <nav id = "nav">
+                <h1 id = "projectHeader" class = "white">Projects</h1>
+                <div id = "projectDiv" class = "flex-column white"></div>
+                <div id = "projectDescriptionDiv" class = "hidden">
+                    <input id = "projectDescriptionInput" class = "input" type = "text" name = "project" value = "" placeholder = "Project name" autocomplete = "off">
+                    <div class = "buttonDiv">
+                        <button id = "cancelButton" class = "btn red" type = "button">Cancel</button>
+                        <button id = "submitButton" class = "btn green" type = "submit">Submit</button>
+                    </div>
+                </div>
+                <button id = "addProjectButton" class = "navBtn"><i id = "plusIcon" class="fa fa-plus"></i> Add project</button>
+            </nav>
+            <div id = "projectPreview">
+                <h1 id = "projectTitle" class = "white"></h1>
+                <div id = "taskDiv" class = "flex-column white"></div>
+                <div id = "taskDescriptionDiv" class = "hidden taskDescriptionDiv">
+                    <input id = "taskDescriptionInput" class = "input" type = "text" name = "task" value = "" autocomplete = "off" placeholder = "Task name" required>
+                    <div class = "buttonDiv">
+                        <button id = "cancelTaskButton" class = "btn red">Cancel</button>
+                        <button id = "submitTaskButton" class = "btn green" type = "submit">Submit</button>
+                    </div>
+                </div>  <!--taskDescriptionDiv-->
+                <button id = "addTaskButton"class = "navBtn hidden"><i id = "plusIconProjectPreview" class="fa fa-plus"></i> Add task</button>
+            </div> <!--projectPreview-->
+            <div id = "notePreview">
+                <h1 class = "white" >Notes</h1>
+                <h2 id = "noteTitle" class = "white"></h2>
+                <div id = "noteDiv">
+                    <textarea id = "textArea" class = "textArea hidden"></textarea>
+                    <div id = "noteButtonDiv" class = "hidden buttonDiv">
+                        <button id = "cancelNoteButton" class = "btn red">Cancel</button>
+                        <button id = "saveNoteButton" class = "btn green">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div> <!--content-->
+        
+    </main>
+</body>
+</html>
