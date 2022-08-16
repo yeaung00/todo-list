@@ -78,6 +78,9 @@ const Nav = (() => {
         if (e.target.id === "submitButton") { currentTitle = projectDescriptionInput.value; }
         else { currentTitle = e.target.textContent; }
     }
+    function getCurrentTitle() {
+        return currentTitle;
+    }
     function createProject() {
         Project.setTitle(currentTitle);
         render();
@@ -90,7 +93,7 @@ const Nav = (() => {
         titleButton.classList.add("projectBtn");
         titleButton.textContent = title;
         titleButton.addEventListener("click", setCurrentTitle);
-     //   titleButton.addEventListener("click", ProjectPreview.render);
+        titleButton.addEventListener("click", ProjectPreview.render);
 
         titleButtonDiv.appendChild(titleButton);
         titleButtonDiv.appendChild(Icon.iconSpan());
@@ -106,6 +109,9 @@ const Nav = (() => {
             projectDiv.appendChild(createButton(Title[i]));
         }
     }
+    return {
+        getCurrentTitle,
+    };
 })();
 const ProjectPreview = (() => {
     //cache DOM
@@ -116,4 +122,12 @@ const ProjectPreview = (() => {
     const taskDescriptionInput = document.getElementById("taskDescriptionInput");
     const cancelTaskButton = document.getElementById("cancelTaskButton");
     const submitTaskButton = document.getElementById("submitTaskButton");
+
+    function render() {
+        projectTitle.textContent = Nav.getCurrentTitle();
+        addTaskButton.classList.remove("hidden");
+    }
+    return {
+        render,
+    }
 })();
