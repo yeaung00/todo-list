@@ -27,11 +27,28 @@ const Project = (() => {
     function getDate() {
         return Date;
     }
+    function setNote(e, note) {
+        const titleIndex = Title.indexOf(Nav.getCurrentTitle());
+        const currentTask = e.target.closest("#notePreview").children[1].textContent;
+        const index = Task[titleIndex].indexOf(currentTask);
+        Note[titleIndex].splice(index, 1, note);
+    }
+    function getNote() {
+        return Note;
+    }
     function createTaskArray() {
         Task.push([]);
     }
     function createDateArray() {
         Date.push([]);
+    }
+    function createNoteArray() {
+        Note.push([]);
+    }
+    function createNoteSubArray() {
+        const titleIndex = Title.indexOf(Nav.getCurrentTitle());
+        if (Note.length === 0) { Note.push([". . ."]); }
+        else { Note[titleIndex].push([". . ."]); }
     }
     return {
         setTitle,
@@ -40,8 +57,12 @@ const Project = (() => {
         getTask,
         setDate,
         getDate,
+        setNote,
+        getNote,
         createTaskArray,
         createDateArray,
+        createNoteArray,
+        createNoteSubArray,
     };
 })();
 const Icon = (() => {
@@ -120,6 +141,7 @@ const Nav = (() => {
         Project.setTitle(currentTitle);
         Project.createTaskArray();
         Project.createDateArray();
+        Project.createNoteArray();
         render();
     }
     function createButton(title) {
@@ -185,7 +207,7 @@ const ProjectPreview = (() => {
     }
     function createTask() {
         Project.setTask(currentTask);
-       // Project.createNoteSubArray();
+        Project.createNoteSubArray();
         render();
     }
     function createButton(task) {
@@ -195,7 +217,7 @@ const ProjectPreview = (() => {
         taskButton.classList.add("projectBtn");
         taskButton.textContent = task;
         taskButton.addEventListener("click", setCurrentTask);
-      //  taskButton.addEventListener("click", NotesPreview.render);
+        taskButton.addEventListener("click", NotesPreview.render);
 
         return taskButton;
     }
@@ -234,6 +256,7 @@ const ProjectPreview = (() => {
         }
     }
     return {
+        getCurrentTask,
         render,
     }
 })();
@@ -246,6 +269,24 @@ const NotesPreview = (() => {
     const cancelNoteButton = document.getElementById("cancelNoteButton");
     const saveNoteButton = document.getElementById("saveNoteButton");
 
+    textArea.addEventListener("click", removeHiddenNoteButtonDiv);
+    cancelNoteButton.addEventListener("click", toggleHiddenNoteButtonDiv);
+    saveNoteButton.addEventListener("click", toggleHiddenNoteButtonDiv);
+    saveNoteButton.addEventListener("click", submitNote);
+
+    function removeHiddenTextArea() {
+        textArea.classList.remove("hidden");
+    }
+    function removeHiddenNoteButtonDiv() {
+        noteButtonDiv.classList.remove("hidden");
+    }
+    function toggleHiddenNoteButtonDiv() {
+        noteButtonDiv.classList.toggle("hidden");
+    }
+    function submitNote(e) {
+        Project.setNote(e, textArea.value);
+        render();
+    }
     function render() {
         const titleIndex = Project.getTitle().indexOf(Nav.getCurrentTitle());
         const taskIndex = Project.getTask()[titleIndex].indexOf(ProjectPreview.getCurrentTask());
