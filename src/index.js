@@ -40,5 +40,30 @@ const Nav = (() => {
     }
     function createProject() {
         Project.setTitle(currentTitle);
+        render();
+    }
+    function createButton(title) {
+        const titleButtonDiv = document.createElement("div");
+        const titleButton = document.createElement("button");
+
+        titleButton.classList.add("white");
+        titleButton.classList.add("projectBtn");
+        titleButton.textContent = title;
+        titleButton.addEventListener("click", setCurrentTitle);
+        titleButton.addEventListener("click", ProjectPreview.render);
+
+        titleButtonDiv.appendChild(titleButton);
+        titleButtonDiv.appendChild(Icon.iconSpan());
+        titleButtonDiv.addEventListener("mouseenter", Icon.toggleIcon);
+        titleButtonDiv.addEventListener("mouseleave", Icon.toggleIcon);
+
+        return titleButtonDiv;
+    }
+    function render() {
+        const Title = Project.getTitle();
+        projectDiv.innerHTML = "";
+        for (let i = 0; i < Title.length; i++) {
+            projectDiv.appendChild(createButton(Title[i]));
+        }
     }
 })();
