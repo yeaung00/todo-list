@@ -123,6 +123,14 @@ const ProjectPreview = (() => {
     const cancelTaskButton = document.getElementById("cancelTaskButton");
     const submitTaskButton = document.getElementById("submitTaskButton");
 
+    addTaskButton.addEventListener("click", toggleHidden);
+    cancelTaskButton.addEventListener("click", toggleHidden);
+    submitTaskButton.addEventListener("click", toggleHidden);
+    
+    function toggleHidden() {
+        taskDescriptionDiv.classList.toggle("hidden");
+        addTaskButton.classList.toggle("hidden");
+    }
     function render() {
         projectTitle.textContent = Nav.getCurrentTitle();
         addTaskButton.classList.remove("hidden");
