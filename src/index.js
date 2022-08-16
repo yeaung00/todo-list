@@ -484,7 +484,7 @@ const LocalStorage = (() => {
             alert("This computer does not support local storage. Your data will not be saved.")
         }
     }
-})();
+})(); 
 
 function del() {
     window.localStorage.removeItem("Title");
