@@ -107,3 +107,13 @@ const Nav = (() => {
         }
     }
 })();
+const ProjectPreview = (() => {
+    //cache DOM
+    const projectTitle = document.getElementById("projectTitle");
+    const addTaskButton = document.getElementById("addTaskButton");
+    const taskDiv = document.getElementById("taskDiv");
+    const taskDescriptionDiv = document.getElementById("taskDescriptionDiv");
+    const taskDescriptionInput = document.getElementById("taskDescriptionInput");
+    const cancelTaskButton = document.getElementById("cancelTaskButton");
+    const submitTaskButton = document.getElementById("submitTaskButton");
+})();
