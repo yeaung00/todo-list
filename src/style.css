@@ -1,0 +1,176 @@
+body {
+    /*  font-family: Arial, Helvetica, sans-serif;*/
+      margin: 0;
+      background-color: black;
+  }
+  
+  /* ===============
+  Typography
+  ================ */
+  #projectHeader {
+      font-size: 2.25rem;
+  }
+  .white {
+      color: rgb(200, 200, 200);
+  }
+  #title {
+      font-size: 3rem;
+  }
+  .navText {
+      font-size: 1.75rem;
+  }
+  #projectTitle {
+      font-size: 2.25rem;
+  }
+  /* ===============
+  Icons
+  ================ */
+  .fa {
+      color: white;
+  
+  }
+  .fa-clipboard-check {
+      font-size: 3rem;
+      padding: 0 0.2em;
+  }
+  .iconSpan {
+    float: right;
+  }
+  .fa-trash {
+      font-size: 1rem;
+  }
+  .fa-pen-to-square {
+      font-size: 1rem;
+  
+  }
+  .fa-trash:hover {
+      color:rgb(211, 151, 38);
+  }
+  .fa-pen-to-square:hover {
+      color:rgb(211, 151, 38);
+  }
+  /* ===============
+  Nav bar
+  ================ */
+  #nav {
+      width: 25em;
+      height: 100vh;
+      background-color: rgb(15, 15, 15);
+      padding: 1.5em;
+  }
+  
+  .btnDiv {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 1em;
+  }
+  /* ===============
+  Layout
+  ================ */
+  #content {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+  }
+  
+  .navBtn {
+      padding: 0.5em;
+      color: white;
+      text-align: left;
+      font-size: 1.25rem;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+      border-radius: 0.5em;
+      background-color: transparent;
+  }
+  
+  .navBtn:hover, .navBtn:hover * {
+      background-color: rgb(211, 151, 38);
+    /*  background-color: rgb(191, 191, 191);*/
+      color: black;
+  }
+  
+  div .hidden {
+      display: none;
+  }
+  .btn {
+      border: none;
+      padding: 0.75em 1em;
+      color: black;
+      border-radius: 0.5em;
+      font-size: 1rem;
+      cursor: pointer;
+  }
+  .btn:hover {
+      filter: brightness(80%);
+  }
+  .red {
+      background-color: rgb(213, 65, 65);
+  }
+  
+  .green {
+      background-color: rgb(104, 161, 104);
+  }
+  
+  .input {
+      padding: 0.5em;
+      border: none;
+      border-radius: 0.5em;
+      font-size: 1.25rem;
+      background-color: rgb(200, 200, 200);
+  }
+  .flex-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      margin-bottom: 1em;
+  }
+  .projectBtn {
+      width: fit-content;
+      text-align: left;
+      background-color: transparent;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      padding: 0;
+  }
+  .projectBtn:hover {
+      color: orange;
+  }
+  
+  #projectPreview {
+      background-color: rgb(20, 20, 20);
+      padding: 1.5em;
+      width: 75vw;
+      height: 100vh;
+  }
+  #projectDiv {
+      display: flex;
+  }
+  
+  #notePreview {
+    width: 25em;
+    height: 100vh;
+    background-color: rgb(15, 15, 15);
+    padding: 1.5em;
+  }
+  
+  .dueDate {
+    background-color: transparent;
+    color: rgb(200, 200, 200);
+    border: none;
+    color-scheme: dark;
+    cursor: pointer;
+  }
+  .textArea {
+    width: 100%;
+    height: 20em;
+    background-color: transparent;
+    color: white;
+    border: none;
+    resize: none;
+  }
+  .textArea:focus {
+    outline:none;
+  }
