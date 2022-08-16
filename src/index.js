@@ -1,3 +1,4 @@
+import './style.css';
 const Project = (() => {
     let Title = [];
     let Task = [];
