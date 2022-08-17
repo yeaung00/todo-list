@@ -10,7 +10,7 @@ Live preview: https://yeaung00.github.io/todo-list/
 <li>Add/delete/edit notes to each task</li>
 <li>Displays due date of each task</li>
 <li>Saves to local storage.</li>
-<ul>
+</ul>
 
 <h2><b>Challenges:</b></h2>
 <p>
